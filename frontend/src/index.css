@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root { color-scheme: light; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    @apply bg-surface-sunken text-ink font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 { @apply font-display tracking-tight text-ink; }
+  /* Respect users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+  :focus-visible { @apply outline-none ring-2 ring-brand-500 ring-offset-2 ring-offset-surface-sunken; }
+}
+
+@layer components {
+  /* Reusable primitives the whole app shares for visual consistency.
+     Buttons are fully-rounded "pills" with spring-eased magnetic press. */
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-300 ease-spring disabled:opacity-50 disabled:pointer-events-none active:scale-[0.97] focus-visible:shadow-focus; }
+  .btn-md { @apply h-11 px-5 text-sm; }
+  .btn-sm { @apply h-9 px-4 text-sm; }
+  .btn-lg { @apply h-12 px-6 text-[15px]; }
+  .btn-primary { @apply btn bg-brand-700 text-white hover:bg-brand-800 shadow-soft hover:shadow-lift; }
+  .btn-secondary { @apply btn bg-white text-brand-800 ring-1 ring-inset ring-black/[0.06] hover:ring-brand-300 hover:bg-brand-50 shadow-soft; }
+  .btn-ghost { @apply btn text-ink-soft hover:bg-brand-50 hover:text-brand-800; }
+  .btn-danger { @apply btn bg-danger text-white hover:brightness-95 shadow-soft; }
+
+  /* Soft floating card — hairline ring + diffused ambient shadow, no harsh borders. */
+  .card { @apply bg-surface rounded-2xl shadow-card ring-1 ring-black/[0.04]; }
+
+  /* Pill-shaped inputs to echo the button language; textareas relax to a squircle. */
+  .input { @apply h-11 w-full rounded-full bg-white px-4 text-sm text-ink ring-1 ring-inset ring-black/[0.07] placeholder:text-ink-muted/70 focus:ring-2 focus:ring-brand-500/50 focus-visible:outline-none transition; }
+  textarea.input, select[multiple].input { @apply rounded-2xl py-2.5; }
+  .label { @apply block text-sm font-medium text-ink-soft mb-1.5; }
+  .badge { @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium; }
+  .chip { @apply inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-sm text-ink-soft ring-1 ring-inset ring-black/[0.06]; }
+  /* Eyebrow tag — microscopic pill that precedes major headings. */
+  .eyebrow { @apply inline-flex items-center rounded-full bg-brand-50 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-700 ring-1 ring-inset ring-brand-200/60; }
+
+  .container-app { @apply mx-auto w-full max-w-6xl px-4 sm:px-6; }
+  .skeleton { @apply relative overflow-hidden bg-black/[0.05] rounded-xl; }
+  .skeleton::after { content: ''; @apply absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/70 to-transparent; animation: shimmer 1.4s infinite; }
+}

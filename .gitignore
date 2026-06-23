@@ -1,0 +1,19 @@
+node_modules/
+dist/
+build/
+.env
+.env.local
+*.local
+.DS_Store
+coverage/
+*.log
+npm-debug.log*
+.vscode/
+.idea/
+dev-dist/
+.vercel
+
+# TS build artifacts
+*.tsbuildinfo
+frontend/vite.config.js
+frontend/vite.config.d.ts
